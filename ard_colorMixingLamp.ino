@@ -1,4 +1,4 @@
-const int greeenLEDPin = 9;
+const int greenLEDPin = 9;
 const int blueLEDPin = 10;
 const int redLEDPin = 11;
 
@@ -23,6 +23,7 @@ void setup() {
 }
 
 void loop() {
+  //get the readings
   redSensorValue = analogRead(redSensorPin);
   delay(5);
   greenSensorValue = analogRead(greenSensorPin);
@@ -35,4 +36,21 @@ void loop() {
   Serial.print(greenSensorValue);
   Serial.print("\t Blue: ");
   Serial.println(blueSensorValue);
+
+  //convert and record the led light levels
+  redValue = redSensorValue/4;
+  greenValue = greenSensorValue/4;
+  blueValue = blueSensorValue/4;
+
+  Serial.print("Mapped Sensor Values \t Red: ");
+  Serial.print(redValue);
+  Serial.print("\t Green: ");
+  Serial.print(greenValue);
+  Serial.print("\t Blue: ");
+  Serial.println(blueValue);
+
+  //set the led light levels
+  analogWrite(redLEDPin, redValue);
+  analogWrite(blueLEDPin, blueValue);
+  analogWrite(greenLEDPin, greenValue);
 }
